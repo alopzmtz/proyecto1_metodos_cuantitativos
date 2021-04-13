@@ -11,37 +11,52 @@ class Demo1:
         self.master = master
         self.frame = tk.Frame(self.master)
 
-        
+        container = tk.Frame(master)
+        self.canvas = tk.Canvas(container)
+        scrollbar = ttk.Scrollbar(container, orient="vertical", command=self.canvas.yview)
+        scrollable_frame = ttk.Frame(self.canvas)
+        scrollable_frame.bind(
+            "<Configure>",
+            lambda e: self.canvas.configure(
+                scrollregion=self.canvas.bbox("all")
+            )
+        )
+        self.canvas.create_window((0, 0), window=scrollable_frame, anchor="w")
+        self.canvas.configure(yscrollcommand=scrollbar.set)  
+
          # Add buttons
-        self.button1 = tk.Button(self.frame,text="Metodo de los Cuadrados Medios", command=self.new_windowMedios)
+        self.button1 = tk.Button(scrollable_frame,text="Metodo de los Cuadrados Medios", command=self.new_windowMedios)
         self.button1.pack(pady = 20)
         self.button1.config(width = 50, height = 5)
         self.button1.config(font=("Courier", 15))
         
-        self.button2 = tk.Button( self.frame, text = "Metodo Congruencial Lineal", command=self.loadMetodoCongruencialLineal)
+        self.button2 = tk.Button( scrollable_frame, text = "Metodo Congruencial Lineal", command=self.loadMetodoCongruencialLineal)
         self.button2.pack(pady = 20)
         self.button2.config(width = 50, height = 5)
         self.button2.config(font=("Courier", 15))
         
-        self.button3 = tk.Button( self.frame, text = "Metodo Congruencial Mixto", command=self.loadMetodoCongruencialMixto)
+        self.button3 = tk.Button( scrollable_frame, text = "Metodo Congruencial Mixto", command=self.loadMetodoCongruencialMixto)
         self.button3.pack(pady = 20)
         self.button3.config(width = 50, height = 5)
         self.button3.config(font=("Courier", 15))
 
-        self.button4 = tk.Button( self.frame, text = "Metodo Congruencial Multiplicativo", command=self.loadMetodoCongruencialMultiplicativo)
+        self.button4 = tk.Button( scrollable_frame, text = "Metodo Congruencial Multiplicativo", command=self.loadMetodoCongruencialMultiplicativo)
         self.button4.pack(pady = 20)
         self.button4.config(width = 50, height = 5)
         self.button4.config(font=("Courier", 15))
 
-        self.button5 = tk.Button( self.frame, text = "Generadores Combinados", command=self.loadMetodoCombinados)
+        self.button5 = tk.Button( scrollable_frame, text = "Generadores Combinados", command=self.loadMetodoCombinados)
         self.button5.pack(pady = 20)
         self.button5.config(width = 50, height = 5)
         self.button5.config(font=("Courier", 15))
         
-        
+      
+        container.pack()
+        self.canvas.pack(side="left", fill="both", expand=True)
+        scrollbar.pack(side="right", fill="y")
         #button = Button(window, text="Refresh Screen", command=).place(x=80, y=660, width=300, height=75)
 
-        self.frame.pack()
+        #self.frame.pack()
 
     def new_windowMedios(self):
         self.newWindow = tk.Toplevel(self.master)
