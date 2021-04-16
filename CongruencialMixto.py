@@ -52,7 +52,8 @@ class CongruencialMixto:
                     print(q)
                     print("Segundo chequeo de Hull-Dobell pasado")
                     break
-
+                else:
+                    return False
             # iii) Si 4 divide a m ; entonces, 4 divide a (a-1). Es decir, 𝑎≡1𝑚𝑜𝑑4
             if self.modulo % 4 == 0 and ((self.multiplicativo - 1) % 4 == 0):
                 print("Hull-Dobell pasado!")
