@@ -110,59 +110,71 @@ class MediosCuadrados:
         self.master.geometry("1100x460")
         # Show image using label
 
-        self.label1 = tk.Label(self.frame, image=self.bg)
+        ### Titulo
+
+        self.label1 = tk.Label(self.master, image=self.bg)
         self.label1.place(x=0, y=0)
-        self.label2 = tk.Label(self.frame, text="Medios Cuadrados")
+        self.label2 = tk.Label(self.master, text="Medios Cuadrados")
         self.label2.pack(pady=25)
         self.label2.config(width=200)
         self.label2.config(font=("Courier", 44))
 
         self.labelAyuda = tk.Label(
-            self.frame, text="Procura que la semilla sea de 4 digitos"
+            self.master, text="Procura que la semilla sea de 4 digitos"
         )
         self.labelAyuda.pack(pady=10)
         self.labelAyuda.config(width=200)
         self.labelAyuda.config(font=("Courier", 10))
 
         # Add buttons
+        ### Semilla
 
-        self.label3 = tk.Label(self.frame, text="Semilla")
-        self.label3.pack()
-        self.label3.config(width=30)
-        self.label3.config(font=("Courier", 10))
+        self.labelSmilla = tk.Label(self.master, text="Semilla")
+        self.labelSmilla.place(x=10, y=200)
+        self.labelSmilla.config(width=30)
+        self.labelSmilla.config(font=("Courier", 10))
 
         self.semilla = ""
-        self.semillaEntered = ttk.Entry(self.frame, width=15, textvariable=self.semilla)
+        self.semillaEntered = ttk.Entry(self.master, width=40, textvariable=self.semilla)
+        self.semillaEntered.place(x=300, y=200)
 
-        self.semillaEntered.pack(pady=20)
-        self.semillaEntered.config(width=30)
-
-        self.label4 = tk.Label(self.frame, text="Numeros Random")
-        self.label4.pack()
-        self.label4.config(width=30)
-        self.label4.config(font=("Courier", 10))
+        self.labelnRandom = tk.Label(self.master, text="Numeros Random")
+        self.labelnRandom.place(x=10, y=250)
+        self.labelnRandom.config(width=30)
+        self.labelnRandom.config(font=("Courier", 10))
 
         self.nRandoms = ""
         self.nRandomsEntered = ttk.Entry(
-            self.frame, width=15, textvariable=self.nRandoms
+            self.master, width=40, textvariable=self.nRandoms
         )
-        self.nRandomsEntered.place(x=400, y=350)
+        self.nRandomsEntered.place(x=300, y=250)
 
-        self.nRandomsEntered.pack(pady=20)
-        self.nRandomsEntered.config(width=30)
         # nameEntered.grid(column = 0, row = 1)
 
         print(self.semillaEntered.get())
 
-        self.button1 = tk.Button(self.frame, text="Generar", command=self.generar)
-        self.button1.pack(pady=20)
+        self.button1 = tk.Button(self.master, text="Generar", command=self.generar)
+        self.button1.place(x=170, y=300)
         self.button1.config(width=25, height=2)
         self.button1.config(font=("Courier", 10))
+
+        ### Scroll Bar
+
+        scrollbar = Scrollbar(self.master)
+        scrollbar.pack(side=RIGHT, fill=Y)
+
+        self.mylist = Listbox(self.master, yscrollcommand=scrollbar.set)
+
+        self.mylist.pack(side=RIGHT, fill=BOTH)
+        self.mylist.place(x=700, y=200)
+        self.mylist.config(width=30, height=20)
+        scrollbar.config(command=self.mylist.yview)
 
         self.frame.pack()
 
     def generar(self):
-
+        
+        self.mylist.delete(0, END)
         self.cuadrado = CuadradosMedios()
         semilla = self.semillaEntered.get()
         nRandoms = self.nRandomsEntered.get()
@@ -180,6 +192,9 @@ class MediosCuadrados:
 
         self.label5.config()
         self.label5.config(font=("Courier", 10))
+
+        for i in self.cuadrado.listaRands:
+               self.mylist.insert(END, i)
 
     def close_windows(self):
         self.master.destroy()
@@ -259,10 +274,10 @@ class MetodoCongruencialLineal:
 
         self.nRandoms = ""
         self.nRandomsEntered = ttk.Entry(
-            self.master, width=50, textvariable=self.nRandoms
+            self.master, width=40, textvariable=self.nRandoms
         )
         self.nRandomsEntered.place(x=300, y=350)
-        self.nRandomsEntered.config(width=30)
+       
 
         ### Boton de generar
 
