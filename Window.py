@@ -198,7 +198,7 @@ class MetodoCongruencialLineal:
 
         self.label1 = tk.Label(self.master, image=self.bg)
         self.label1.place(x=0, y=0)
-        self.label2 = tk.Label(self.master, text="Medios Congruencial Lineal")
+        self.label2 = tk.Label(self.master, text="Método Congruencial Lineal")
         self.label2.pack(pady=50)
         self.label2.config(width=200)
         self.label2.config(font=("Courier", 44))
@@ -324,7 +324,7 @@ class MetodoCongruencialMixto:
 
         self.label1 = tk.Label(self.master, image=self.bg)
         self.label1.place(x=0, y=0)
-        self.label2 = tk.Label(self.master, text="Medios Congruencial Mixto")
+        self.label2 = tk.Label(self.master, text="Método Congruencial Mixto")
         self.label2.pack(pady=50)
         self.label2.config(width=200)
         self.label2.config(font=("Courier", 44))
@@ -505,7 +505,7 @@ class CongruencialMultiplicativo:
 
         self.label1 = tk.Label(self.master, image=self.bg)
         self.label1.place(x=0, y=0)
-        self.label2 = tk.Label(self.master, text="Medios Congruencial Multiplicativo")
+        self.label2 = tk.Label(self.master, text="Método Congruencial Multiplicativo")
         self.label2.pack(pady=50)
         self.label2.config(width=200)
         self.label2.config(font=("Courier", 44))
