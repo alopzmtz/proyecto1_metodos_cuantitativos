@@ -24,19 +24,21 @@ class CuadradosMedios:
     def numAleatorio(self,x_cuadrada):
         x_cuadrada_string = list(str(x_cuadrada))
         new_num = ""
+        if len(x_cuadrada_string) == 5:
+            x_cuadrada_string.insert(0, 0)
         if len(x_cuadrada_string) == 6:
             x_cuadrada_string.insert(0, 0)
         if len(x_cuadrada_string) == 7:
             x_cuadrada_string.insert(0, 0)
         for x in range(2, len(x_cuadrada_string)-2):
-            new_num += x_cuadrada_string[x]
-        print(new_num)
+            new_num += str(x_cuadrada_string[x])
+        print(new_num, x_cuadrada_string)
         self.generarRi(int(new_num))
     
 
     def generador(self,raiz):
         x_cuadrada = raiz * raiz
-        self.numAleatorio(x_cuadrada)
+        self.numAleatorio(int(x_cuadrada))
     
     def ciclo(self, semilla, nRandoms):
         self.semilla = semilla
