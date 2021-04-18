@@ -1,17 +1,29 @@
 import scipy.stats as ss
+import random
+import math
 
+N = int(input("Enter the size of random numbers to be produced : "))
+D_plus = []
+D_minus = []
+_random = []
 
-def test_chicuadrado(data, N):
-    n = data.count()
-    freqs, edges, _ = ss.binned_statistic(data, data, statistic="count")
+# Rank the N random numbers
+for i in range(0, N):
+    _random.append(random.random())
+    _random.sort()
 
-    def ei(i):
-        return n*(N.cdf(edges[i]) - N.cdf(edges[i-1]))
-    expected = [ei(i) for i in range(1, len(edges))]
-    return ss.chisquare(freqs, expected)
+# Calculate max(i/N-Ri)
+for i in range(1, N + 1):
+    x = i / N - _random[i - 1]
+    D_plus.append(x)
 
-
-def test_kolmogorov(data):
-    media, desviacion = ss.norm.fit(data)
-    d, pvalor = ss.ktest(data, "norm", args=(media, desviacion))
-    return pvalor
+# Calculate max(Ri-((i-1)/N))
+for i in range(1, N + 1):
+    y = (i - 1) / N
+    y = _random[i - 1] - y
+    D_minus.append(y)
+560
+# Calculate max(D+, D-)
+ans = max(int(math.sqrt(N)) * D_plus, int(math.sqrt(N)) * D_minus)
+print("Value of D is :")
+print(ans)
