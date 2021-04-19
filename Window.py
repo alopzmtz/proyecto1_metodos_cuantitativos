@@ -4,6 +4,7 @@ from tkinter import filedialog
 from tkinter import *
 from tkinter import ttk
 from CuadradosMedios import CuadradosMedios
+from Smirnoff import *
 
 
 class Demo1:
@@ -19,7 +20,8 @@ class Demo1:
         scrollable_frame = ttk.Frame(self.canvas)
         scrollable_frame.bind(
             "<Configure>",
-            lambda e: self.canvas.configure(scrollregion=self.canvas.bbox("all")),
+            lambda e: self.canvas.configure(
+                scrollregion=self.canvas.bbox("all")),
         )
         self.canvas.create_window((0, 0), window=scrollable_frame, anchor="w")
         self.canvas.config(width=605, height=1000)
@@ -109,7 +111,7 @@ class MediosCuadrados:
         self.master.geometry("1100x460")
         # Show image using label
 
-        ### Titulo
+        # Titulo
 
         # self.label1 = tk.Label(self.master, image=self.bg)
         # self.label1.place(x=0, y=0)
@@ -126,7 +128,7 @@ class MediosCuadrados:
         self.labelAyuda.config(font=("Courier", 10))
 
         # Add buttons
-        ### Semilla
+        # Semilla
 
         self.labelSmilla = tk.Label(self.master, text="Semilla")
         self.labelSmilla.place(x=10, y=200)
@@ -154,12 +156,13 @@ class MediosCuadrados:
 
         print(self.semillaEntered.get())
 
-        self.button1 = tk.Button(self.master, text="Generar", command=self.generar)
+        self.button1 = tk.Button(
+            self.master, text="Generar", command=self.generar)
         self.button1.place(x=170, y=300)
         self.button1.config(width=25, height=2)
         self.button1.config(font=("Courier", 10))
 
-        ### Scroll Bar
+        # Scroll Bar
 
         scrollbar = Scrollbar(self.master)
         scrollbar.pack(side=RIGHT, fill=Y)
@@ -195,12 +198,13 @@ class MetodoCongruencialLineal:
     def __init__(self, master):
         self.master = master
         self.frame = tk.Frame(self.master, height=1000)
+        self.result = []
 
         # self.bg = PhotoImage(file="fondo.gif")
 
         self.master.geometry("1100x630")
 
-        ### Titulo
+        # Titulo
 
         # self.label1 = tk.Label(self.master, image=self.bg)
         # self.label1.place(x=0, y=0)
@@ -209,7 +213,7 @@ class MetodoCongruencialLineal:
         self.label2.config(width=200)
         self.label2.config(font=("Courier", 44))
 
-        ### Semilla
+        # Semilla
         self.labelSmilla = tk.Label(self.master, text="Semilla")
         self.labelSmilla.place(x=10, y=150)
         self.labelSmilla.config(width=30)
@@ -221,7 +225,7 @@ class MetodoCongruencialLineal:
         )
         self.semillaEntered.place(x=300, y=150)
 
-        ### Multiplicador
+        # Multiplicador
         self.labelMultiplicador = tk.Label(self.master, text="Multiplicador")
         self.labelMultiplicador.place(x=10, y=200)
         self.labelMultiplicador.config(width=30)
@@ -233,7 +237,7 @@ class MetodoCongruencialLineal:
         )
         self.multiplicativoEntered.place(x=300, y=200)
 
-        ### Incremento
+        # Incremento
         self.labelIncremento = tk.Label(self.master, text="Incremento")
         self.labelIncremento.place(x=10, y=250)
         self.labelIncremento.config(width=30)
@@ -245,7 +249,7 @@ class MetodoCongruencialLineal:
         )
         self.incrementoEntered.place(x=300, y=250)
 
-        ### Modulo
+        # Modulo
 
         self.labelModulo = tk.Label(self.master, text="Modulo")
         self.labelModulo.place(x=10, y=300)
@@ -253,10 +257,11 @@ class MetodoCongruencialLineal:
         self.labelModulo.config(font=("Courier", 10))
 
         self.modulo = ""
-        self.moduloEntered = ttk.Entry(self.master, width=40, textvariable=self.modulo)
+        self.moduloEntered = ttk.Entry(
+            self.master, width=40, textvariable=self.modulo)
         self.moduloEntered.place(x=300, y=300)
 
-        ### Numero Random
+        # Numero Random
 
         self.labelnRandom = tk.Label(self.master, text="Numeros Random")
         self.labelnRandom.place(x=10, y=350)
@@ -269,17 +274,43 @@ class MetodoCongruencialLineal:
         )
         self.nRandomsEntered.place(x=300, y=350)
 
-        ### Boton de generar
+        # Pruebas de bondad
+        self.labelAlphas = tk.Label(self.master, text="Alpha para pruebas")
+        self.labelAlphas.place(x=10, y=400)
+        self.labelAlphas.config(width=30)
+        self.labelAlphas.config(font=("Courier", 10))
+
+        self.alphaTest = ""
+        self.alphaTestEntered = ttk.Entry(
+            self.master, width=40, textvariable=self.nRandoms
+        )
+        self.alphaTestEntered.place(x=300, y=400)
+        # Boton de generar
 
         self.button1 = tk.Button(
             self.master, text="Generar", command=self.cicloDeGeneradores
         )
-        self.button1.place(x=170, y=400)
+        self.button1.place(x=100, y=450)
         self.button1.config(width=25, height=2)
         self.button1.config(font=("Courier", 10))
 
-        ### Scroll Bar
+        # Boton Kolmogorov
+        self.button2 = tk.Button(
+            self.master, text="Kolmogorov", command=self.kolmogorov
+        )
+        self.button2.place(x=380, y=450)
+        self.button2.config(width=25, height=2)
+        self.button2.config(font=("Courier", 10))
 
+        # Boton Xi Cuadrada
+        self.button2 = tk.Button(
+            self.master, text="Chi cuadrada", command=self.chi2
+        )
+        self.button2.place(x=380, y=500)
+        self.button2.config(width=25, height=2)
+        self.button2.config(font=("Courier", 10))
+
+        # Scroll Bar
         scrollbar = Scrollbar(self.master)
         scrollbar.pack(side=RIGHT, fill=Y)
 
@@ -302,6 +333,7 @@ class MetodoCongruencialLineal:
         return nextRandom
 
     def cicloDeGeneradores(self):
+        self.result.clear()
         nextRandom = int(self.semillaEntered.get())
         self.mylist.delete(0, END)
         for i in range(0, int(self.nRandomsEntered.get())):
@@ -310,7 +342,17 @@ class MetodoCongruencialLineal:
                 self.moduloEntered.get()
             )
             self.mylist.insert(END, randomNum)
+            self.result.append(randomNum)
             nextRandom = newRandom
+
+    def kolmogorov(self):
+        ans = smirnoff(self.result, float(self.alphaTestEntered.get()))
+        self.mylist.insert(END, ans)
+
+    def chi2(self):
+        ans = chi_square(self.result, float(self.alphaTestEntered.get()))
+        print("1")
+        self.mylist.insert(END, ans)
 
     def close_windows(self):
         self.master.destroy()
@@ -320,12 +362,13 @@ class MetodoCongruencialMixto:
     def __init__(self, master):
         self.master = master
         self.frame = tk.Frame(self.master, height=1000)
+        self.result = []
 
         # self.bg = PhotoImage(file="fondo.gif")
 
         self.master.geometry("1100x630")
 
-        ### Titulo
+        # Titulo
 
         # self.label1 = tk.Label(self.master, image=self.bg)
         # self.label1.place(x=0, y=0)
@@ -334,7 +377,7 @@ class MetodoCongruencialMixto:
         self.label2.config(width=200)
         self.label2.config(font=("Courier", 44))
 
-        ### Semilla
+        # Semilla
         self.labelSmilla = tk.Label(self.master, text="Semilla")
         self.labelSmilla.place(x=10, y=150)
         self.labelSmilla.config(width=30)
@@ -346,7 +389,7 @@ class MetodoCongruencialMixto:
         )
         self.semillaEntered.place(x=300, y=150)
 
-        ### Multiplicador
+        # Multiplicador
         self.labelMultiplicador = tk.Label(self.master, text="Multiplicador")
         self.labelMultiplicador.place(x=10, y=200)
         self.labelMultiplicador.config(width=30)
@@ -358,7 +401,7 @@ class MetodoCongruencialMixto:
         )
         self.multiplicativoEntered.place(x=300, y=200)
 
-        ### Incremento
+        # Incremento
         self.labelIncremento = tk.Label(self.master, text="Incremento")
         self.labelIncremento.place(x=10, y=250)
         self.labelIncremento.config(width=30)
@@ -370,7 +413,7 @@ class MetodoCongruencialMixto:
         )
         self.incrementoEntered.place(x=300, y=250)
 
-        ### Modulo
+        # Modulo
 
         self.labelModulo = tk.Label(self.master, text="Modulo")
         self.labelModulo.place(x=10, y=300)
@@ -378,10 +421,11 @@ class MetodoCongruencialMixto:
         self.labelModulo.config(font=("Courier", 10))
 
         self.modulo = ""
-        self.moduloEntered = ttk.Entry(self.master, width=40, textvariable=self.modulo)
+        self.moduloEntered = ttk.Entry(
+            self.master, width=40, textvariable=self.modulo)
         self.moduloEntered.place(x=300, y=300)
 
-        ### Numero Random
+        # Numero Random
 
         self.labelnRandom = tk.Label(self.master, text="Numeros Random")
         self.labelnRandom.place(x=10, y=350)
@@ -395,16 +439,44 @@ class MetodoCongruencialMixto:
         self.nRandomsEntered.place(x=300, y=350)
         self.nRandomsEntered.config(width=30)
 
-        ### Boton de generar
+        # Pruebas de bondad
+        self.labelAlphas = tk.Label(self.master, text="Alpha para pruebas")
+        self.labelAlphas.place(x=10, y=400)
+        self.labelAlphas.config(width=30)
+        self.labelAlphas.config(font=("Courier", 10))
+
+        self.alphaTest = ""
+        self.alphaTestEntered = ttk.Entry(
+            self.master, width=40, textvariable=self.nRandoms
+        )
+        self.alphaTestEntered.place(x=300, y=400)
+
+        # Boton de generar
 
         self.button1 = tk.Button(
             self.master, text="Generar", command=self.cicloDeGeneradores
         )
-        self.button1.place(x=170, y=450)
+        self.button1.place(x=100, y=450)
         self.button1.config(width=25, height=2)
         self.button1.config(font=("Courier", 10))
 
-        ### Scroll Bar
+        # Boton Kolmogorov
+        self.button2 = tk.Button(
+            self.master, text="Kolmogorov", command=self.kolmogorov
+        )
+        self.button2.place(x=380, y=450)
+        self.button2.config(width=25, height=2)
+        self.button2.config(font=("Courier", 10))
+
+        # Boton Xi Cuadrada
+        self.button2 = tk.Button(
+            self.master, text="Chi cuadrada", command=self.chi2
+        )
+        self.button2.place(x=380, y=500)
+        self.button2.config(width=25, height=2)
+        self.button2.config(font=("Courier", 10))
+
+        # Scroll Bar
 
         scrollbar = Scrollbar(self.master)
         scrollbar.pack(side=RIGHT, fill=Y)
@@ -439,6 +511,7 @@ class MetodoCongruencialMixto:
                     self.moduloEntered.get()
                 )
                 self.mylist.insert(END, randomNum)
+                self.result.append(randomNum)
                 nextRandom = newRandom
 
     def checarPrimo(self, num):
@@ -460,7 +533,8 @@ class MetodoCongruencialMixto:
     def hullDobell(self):
         # i) Sea c y m primos relativo (el máximo común divisor entero c y m es 1)
         if (
-            math.gcd(int(self.incrementoEntered.get()), int(self.moduloEntered.get()))
+            math.gcd(int(self.incrementoEntered.get()),
+                     int(self.moduloEntered.get()))
             == 1
         ):
             print("Primer chequeo de Hull-Dobell pasado")
@@ -496,26 +570,36 @@ class MetodoCongruencialMixto:
         self.labelHullDobell.config(font=("Courier", 10))
         return False
 
+    def kolmogorov(self):
+        ans = smirnoff(self.result, float(self.alphaTestEntered.get()))
+        self.mylist.insert(END, ans)
+
+    def chi2(self):
+        ans = chi_square(self.result, float(self.alphaTestEntered.get()))
+        self.mylist.insert(END, ans)
+
 
 class CongruencialMultiplicativo:
     def __init__(self, master):
         self.master = master
         self.frame = tk.Frame(self.master, height=1000)
+        self.result = []
 
         # self.bg = PhotoImage(file="fondo.gif")
 
         self.master.geometry("1100x630")
 
-        ### Titulo
+        # Titulo
 
         # self.label1 = tk.Label(self.master, image=self.bg)
         # self.label1.place(x=0, y=0)
-        self.label2 = tk.Label(self.master, text="Método Congruencial Multiplicativo")
+        self.label2 = tk.Label(
+            self.master, text="Método Congruencial Multiplicativo")
         self.label2.pack(pady=50)
         self.label2.config(width=200)
         self.label2.config(font=("Courier", 44))
 
-        ### Semilla
+        # Semilla
         self.labelSmilla = tk.Label(self.master, text="Semilla")
         self.labelSmilla.place(x=10, y=150)
         self.labelSmilla.config(width=30)
@@ -527,7 +611,7 @@ class CongruencialMultiplicativo:
         )
         self.semillaEntered.place(x=300, y=150)
 
-        ### Multiplicador
+        # Multiplicador
         self.labelMultiplicador = tk.Label(self.master, text="Multiplicador")
         self.labelMultiplicador.place(x=10, y=200)
         self.labelMultiplicador.config(width=30)
@@ -539,7 +623,7 @@ class CongruencialMultiplicativo:
         )
         self.multiplicativoEntered.place(x=300, y=200)
 
-        ### Modulo
+        # Modulo
 
         self.labelModulo = tk.Label(self.master, text="Modulo")
         self.labelModulo.place(x=10, y=250)
@@ -547,10 +631,11 @@ class CongruencialMultiplicativo:
         self.labelModulo.config(font=("Courier", 10))
 
         self.modulo = ""
-        self.moduloEntered = ttk.Entry(self.master, width=40, textvariable=self.modulo)
+        self.moduloEntered = ttk.Entry(
+            self.master, width=40, textvariable=self.modulo)
         self.moduloEntered.place(x=300, y=250)
 
-        ### Numero Random
+        # Numero Random
 
         self.labelnRandom = tk.Label(self.master, text="Numeros Random")
         self.labelnRandom.place(x=10, y=300)
@@ -564,16 +649,44 @@ class CongruencialMultiplicativo:
         self.nRandomsEntered.place(x=300, y=300)
         self.nRandomsEntered.config(width=30)
 
-        ### Boton de generar
+        # Pruebas de bondad
+        self.labelAlphas = tk.Label(self.master, text="Alpha para pruebas")
+        self.labelAlphas.place(x=10, y=350)
+        self.labelAlphas.config(width=30)
+        self.labelAlphas.config(font=("Courier", 10))
+
+        self.alphaTest = ""
+        self.alphaTestEntered = ttk.Entry(
+            self.master, width=40, textvariable=self.nRandoms
+        )
+        self.alphaTestEntered.place(x=300, y=350)
+
+        # Boton de generar
 
         self.button1 = tk.Button(
             self.master, text="Generar", command=self.cicloDeGeneradores
         )
-        self.button1.place(x=170, y=350)
+        self.button1.place(x=100, y=400)
         self.button1.config(width=25, height=2)
         self.button1.config(font=("Courier", 10))
 
-        ### Scroll Bar
+        # Boton Kolmogorov
+        self.button2 = tk.Button(
+            self.master, text="Kolmogorov", command=self.kolmogorov
+        )
+        self.button2.place(x=380, y=450)
+        self.button2.config(width=25, height=2)
+        self.button2.config(font=("Courier", 10))
+
+        # Boton Xi Cuadrada
+        self.button2 = tk.Button(
+            self.master, text="Chi cuadrada", command=self.chi2
+        )
+        self.button2.place(x=380, y=500)
+        self.button2.config(width=25, height=2)
+        self.button2.config(font=("Courier", 10))
+
+        # Scroll Bar
 
         scrollbar = Scrollbar(self.master)
         scrollbar.pack(side=RIGHT, fill=Y)
@@ -604,6 +717,7 @@ class CongruencialMultiplicativo:
                     self.moduloEntered.get()
                 )
                 self.mylist.insert(END, randomNum)
+                self.result.append(randomNum)
                 nextRandom = newRandom
 
     def validar(self):
@@ -624,6 +738,14 @@ class CongruencialMultiplicativo:
             self.labelValidar.config(font=("Courier", 10))
             return False
 
+    def kolmogorov(self):
+        ans = smirnoff(self.result, float(self.alphaTestEntered.get()))
+        self.mylist.insert(END, ans)
+
+    def chi2(self):
+        ans = chi_square(self.result, float(self.alphaTestEntered.get()))
+        self.mylist.insert(END, ans)
+
     def close_windows(self):
         self.master.destroy()
 
@@ -632,6 +754,7 @@ class MetodoCombinado:
     def __init__(self, master):
         self.master = master
         self.frame = tk.Frame(self.master)
+        self.result = []
 
         # self.bg = PhotoImage(file="fondo.gif")
 
@@ -645,7 +768,7 @@ class MetodoCombinado:
         self.label2.config(width=200)
         self.label2.config(font=("Courier", 44))
 
-        ### Semilla 1
+        # Semilla 1
         self.labelSmilla1 = tk.Label(self.master, text="Semilla 1")
         self.labelSmilla1.place(x=10, y=150)
         self.labelSmilla1.config(width=30)
@@ -657,8 +780,9 @@ class MetodoCombinado:
         )
         self.semillaEntered1.place(x=300, y=150)
 
-        ### Multiplicador 1
-        self.labelMultiplicador1 = tk.Label(self.master, text="Multiplicador 1")
+        # Multiplicador 1
+        self.labelMultiplicador1 = tk.Label(
+            self.master, text="Multiplicador 1")
         self.labelMultiplicador1.place(x=10, y=200)
         self.labelMultiplicador1.config(width=30)
         self.labelMultiplicador1.config(font=("Courier", 10))
@@ -669,7 +793,7 @@ class MetodoCombinado:
         )
         self.multiplicativoEntered1.place(x=300, y=200)
 
-        ### Modulo 1
+        # Modulo 1
 
         self.labelModulo1 = tk.Label(self.master, text="Modulo 1")
         self.labelModulo1.place(x=10, y=250)
@@ -682,7 +806,7 @@ class MetodoCombinado:
         )
         self.moduloEntered1.place(x=300, y=250)
 
-        ### Semilla 2
+        # Semilla 2
         self.labelSmilla2 = tk.Label(self.master, text="Semilla 2")
         self.labelSmilla2.place(x=10, y=300)
         self.labelSmilla2.config(width=30)
@@ -694,8 +818,9 @@ class MetodoCombinado:
         )
         self.semillaEntered2.place(x=300, y=300)
 
-        ### Multiplicador 2
-        self.labelMultiplicador2 = tk.Label(self.master, text="Multiplicador 2")
+        # Multiplicador 2
+        self.labelMultiplicador2 = tk.Label(
+            self.master, text="Multiplicador 2")
         self.labelMultiplicador2.place(x=10, y=350)
         self.labelMultiplicador2.config(width=30)
         self.labelMultiplicador2.config(font=("Courier", 10))
@@ -706,7 +831,7 @@ class MetodoCombinado:
         )
         self.multiplicativoEntered2.place(x=300, y=350)
 
-        ### Modulo 2
+        # Modulo 2
 
         self.labelModulo2 = tk.Label(self.master, text="Modulo 2")
         self.labelModulo2.place(x=10, y=400)
@@ -719,7 +844,7 @@ class MetodoCombinado:
         )
         self.moduloEntered2.place(x=300, y=400)
 
-        ### Numero Random
+        # Numero Random
 
         self.labelnRandom = tk.Label(self.master, text="Numeros Random")
         self.labelnRandom.place(x=10, y=450)
@@ -733,16 +858,16 @@ class MetodoCombinado:
         self.nRandomsEntered.place(x=300, y=450)
         self.nRandomsEntered.config(width=30)
 
-        ### Boton de generar
+        # Boton de generar
 
         self.button1 = tk.Button(
             self.master, text="Generar", command=self.cicloDeGeneradores
         )
-        self.button1.place(x=170, y=500)
+        self.button1.place(x=300, y=550)
         self.button1.config(width=25, height=2)
         self.button1.config(font=("Courier", 10))
 
-        ### Scroll Bar
+        # Scroll Bar
 
         scrollbar = Scrollbar(self.master)
         scrollbar.pack(side=RIGHT, fill=Y)
