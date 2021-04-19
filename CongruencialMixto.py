@@ -69,9 +69,10 @@ class CongruencialMixto:
 
 
 """
-cmg = CongruencialMixto(5, 7, 8, 4)
+4,5,7,8
+27,8,47,100
+cmg = CongruencialMixto(8, 47, 100, 27)
 cmg.cicloDeGeneradores(20)
 """
-
-cmg = CongruencialMixto(8, 47, 100, 27)
+cmg = CongruencialMixto(5, 7, 8, 4)
 cmg.cicloDeGeneradores(20)

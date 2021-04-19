@@ -3,7 +3,6 @@ import tkinter as tk
 from tkinter import filedialog
 from tkinter import *
 from tkinter import ttk
-
 from CuadradosMedios import CuadradosMedios
 
 
@@ -105,15 +104,15 @@ class MediosCuadrados:
         self.master = master
         self.frame = tk.Frame(self.master)
 
-        self.bg = PhotoImage(file="fondo.gif")
+        # self.bg = PhotoImage(file="fondo.gif")
 
         self.master.geometry("1100x460")
         # Show image using label
 
         ### Titulo
 
-        self.label1 = tk.Label(self.master, image=self.bg)
-        self.label1.place(x=0, y=0)
+        # self.label1 = tk.Label(self.master, image=self.bg)
+        # self.label1.place(x=0, y=0)
         self.label2 = tk.Label(self.master, text="Medios Cuadrados")
         self.label2.pack(pady=25)
         self.label2.config(width=200)
@@ -135,7 +134,9 @@ class MediosCuadrados:
         self.labelSmilla.config(font=("Courier", 10))
 
         self.semilla = ""
-        self.semillaEntered = ttk.Entry(self.master, width=40, textvariable=self.semilla)
+        self.semillaEntered = ttk.Entry(
+            self.master, width=40, textvariable=self.semilla
+        )
         self.semillaEntered.place(x=300, y=200)
 
         self.labelnRandom = tk.Label(self.master, text="Numeros Random")
@@ -173,7 +174,7 @@ class MediosCuadrados:
         self.frame.pack()
 
     def generar(self):
-        
+
         self.mylist.delete(0, END)
         self.cuadrado = CuadradosMedios()
         semilla = self.semillaEntered.get()
@@ -183,18 +184,8 @@ class MediosCuadrados:
 
         print(self.cuadrado.listaRands)
 
-        self.label5 = tk.Label(self.frame, text=self.cuadrado.listaRands)
-
-        self.label5.place(x=300)
-        self.label5.pack()
-
-        self.label5.config(width=200)
-
-        self.label5.config()
-        self.label5.config(font=("Courier", 10))
-
         for i in self.cuadrado.listaRands:
-               self.mylist.insert(END, i)
+            self.mylist.insert(END, i)
 
     def close_windows(self):
         self.master.destroy()
@@ -205,14 +196,14 @@ class MetodoCongruencialLineal:
         self.master = master
         self.frame = tk.Frame(self.master, height=1000)
 
-        self.bg = PhotoImage(file="fondo.gif")
+        # self.bg = PhotoImage(file="fondo.gif")
 
         self.master.geometry("1100x630")
 
         ### Titulo
 
-        self.label1 = tk.Label(self.master, image=self.bg)
-        self.label1.place(x=0, y=0)
+        # self.label1 = tk.Label(self.master, image=self.bg)
+        # self.label1.place(x=0, y=0)
         self.label2 = tk.Label(self.master, text="Método Congruencial Lineal")
         self.label2.pack(pady=50)
         self.label2.config(width=200)
@@ -277,7 +268,6 @@ class MetodoCongruencialLineal:
             self.master, width=40, textvariable=self.nRandoms
         )
         self.nRandomsEntered.place(x=300, y=350)
-       
 
         ### Boton de generar
 
@@ -331,14 +321,14 @@ class MetodoCongruencialMixto:
         self.master = master
         self.frame = tk.Frame(self.master, height=1000)
 
-        self.bg = PhotoImage(file="fondo.gif")
+        # self.bg = PhotoImage(file="fondo.gif")
 
         self.master.geometry("1100x630")
 
         ### Titulo
 
-        self.label1 = tk.Label(self.master, image=self.bg)
-        self.label1.place(x=0, y=0)
+        # self.label1 = tk.Label(self.master, image=self.bg)
+        # self.label1.place(x=0, y=0)
         self.label2 = tk.Label(self.master, text="Método Congruencial Mixto")
         self.label2.pack(pady=50)
         self.label2.config(width=200)
@@ -512,14 +502,14 @@ class CongruencialMultiplicativo:
         self.master = master
         self.frame = tk.Frame(self.master, height=1000)
 
-        self.bg = PhotoImage(file="fondo.gif")
+        # self.bg = PhotoImage(file="fondo.gif")
 
         self.master.geometry("1100x630")
 
         ### Titulo
 
-        self.label1 = tk.Label(self.master, image=self.bg)
-        self.label1.place(x=0, y=0)
+        # self.label1 = tk.Label(self.master, image=self.bg)
+        # self.label1.place(x=0, y=0)
         self.label2 = tk.Label(self.master, text="Método Congruencial Multiplicativo")
         self.label2.pack(pady=50)
         self.label2.config(width=200)
@@ -643,13 +633,13 @@ class MetodoCombinado:
         self.master = master
         self.frame = tk.Frame(self.master)
 
-        self.bg = PhotoImage(file="fondo.gif")
+        # self.bg = PhotoImage(file="fondo.gif")
 
         self.master.geometry("1100x630")
         # Show image using label
 
-        self.label1 = tk.Label(self.master, image=self.bg)
-        self.label1.place(x=0, y=0)
+        # self.label1 = tk.Label(self.master, image=self.bg)
+        # self.label1.place(x=0, y=0)
         self.label2 = tk.Label(self.master, text="Metodo Combinado")
         self.label2.pack(pady=50)
         self.label2.config(width=200)
@@ -810,12 +800,10 @@ def main():
     root.title("Numeros Random")
 
     # Add image file
-    bg = PhotoImage(file="fondo.gif")
+    # bg = PhotoImage(file="fondo.gif")
 
     # Show image using label
 
-    label1 = Label(root, image=bg)
-    label1.place(x=0, y=0)
     label2 = Label(root, text="Generacion de Numeros Aleatorios")
     label2.pack(pady=50)
     label2.config(width=200)

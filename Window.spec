@@ -5,7 +5,7 @@ block_cipher = None
 
 
 a = Analysis(['Window.py'],
-             pathex=['/home/alm/Documentos/Escuela/proyecto1_metodos_cuantitativos'],
+             pathex=['C:\\Users\\fabri\\OneDrive\\Documents\\Escuela\\ITC8\\Metodos\\Proyecto1\\proyecto1_metodos_cuantitativos'],
              binaries=[],
              datas=[],
              hiddenimports=[],
